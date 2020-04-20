@@ -1,0 +1,44 @@
+<article>
+    <h2>{{ startup.name }}</h2>
+    <di>
+        <dt> Date Founded></dt>
+        <dd>{{ startup.founded_date|date:"F jS, Y" }}</dd>   {# full moth, date + st or th, year #}
+        <dt>Website</dt>
+        <dd><a href="{{ startup.website }}">{{ startup.website }}</a></dd>
+        <dt>Contact</dt>
+        <dd>{{ startup.contact_email }}</dd>
+        <dt>Tag{{ startup.tags.count|pluralize }}</dt>
+        {% for tag in startup.tags.all %}
+            <dd><a href="">
+            {{ tag.name|title }}
+            </a></dd>
+        {% endfor %}
+
+    </di>
+
+<p>{{ startup.description }}</p>
+{% if startup.newslink_set.all %}
+<section>
+    <h3>Recent News</h3>
+    <u1>
+        {% for newslink in startup.newslink_set.all %}
+        <li>
+            {{ newslink.link|urlize }}
+        </li>
+        {% endfor %}
+    </u1>
+</section>
+{% endif %}
+{% if startup.blog_posts.all%}
+<section>
+    <h3>Blog Post{{ startup.blog_post.all|pluralize }}</h3>
+    <u1>
+        {% for post in startup.blog_posts.all %}
+            <li>
+            <a href=""> {{ post.title|title }}</a>
+            </li>
+        {% endfor %}
+    </u1>
+</section>
+{% endif%}
+</article>
