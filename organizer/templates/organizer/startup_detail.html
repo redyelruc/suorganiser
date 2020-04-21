@@ -4,7 +4,7 @@
         <dt> Date Founded></dt>
         <dd>{{ startup.founded_date|date:"F jS, Y" }}</dd>   {# full moth, date + st or th, year #}
         <dt>Website</dt>
-        <dd><a href="{{ startup.website }}">{{ startup.website }}</a></dd>
+        <dd>{{ startup.website|urlize }}</dd>
         <dt>Contact</dt>
         <dd>{{ startup.contact_email }}</dd>
         <dt>Tag{{ startup.tags.count|pluralize }}</dt>
@@ -16,7 +16,7 @@
 
     </di>
 
-<p>{{ startup.description }}</p>
+<p>{{ startup.description|linebreaks}}</p>
 {% if startup.newslink_set.all %}
 <section>
     <h3>Recent News</h3>
