@@ -15,10 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from organizer.views import homepage
+from organizer.views import tag_detail, tag_list
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', homepage)
+    path(r'tag/', tag_list, name ='organizer_tag_list'),
+    path('tag/<slug>/', tag_detail, name='organizer_tag_detail'),
 ]
