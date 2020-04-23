@@ -16,12 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from organizer.views import tag_detail, tag_list, startup_list, startup_detail
-
+from blog.views import PostList, post_detail
+from .views import redirect_root
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('tag/', tag_list, name ='organizer_tag_list'),
     path('tag/<slug>/', tag_detail, name='organizer_tag_detail'),
-    path('startup/',startup_list, name='organizer/startup_list'),
-    path('startup/<slug>/', startup_detail, name='organizer_startup_detail')
+    path('startup/',startup_list, name='organizer_startup_list'),
+    path('startup/<slug>/', startup_detail, name='organizer_startup_detail'),
+    path('',redirect_root),
+    path('blog/', PostList.as_view(), name='blog_post_list'),
+    path('blog/<year>/<month>/<slug>', post_detail, name = 'blog_post_detail')
 ]
