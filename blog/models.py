@@ -1,5 +1,6 @@
 from django.db import models
 from organizer.models import Startup, Tag
+from django.urls  import reverse
 
 # model for a blog post
 class Post(models.Model):
@@ -13,9 +14,12 @@ class Post(models.Model):
         ordering = ['-pub_date', 'title']
         verbose_name = 'blog_post'
         get_latest_by = 'pub_date'
+
     def __str__(self):
         return"{}:{}".format(self.title,self.pub_date.strftime('%Y-%m-%d'))
 
+    def get_absolute_url(self):
+        return reverse('blog_post_detail', kwargs={'year': self.pub_date.year, 'month' : self.pub_date.month, 'slug': self.slug})
 
 
 

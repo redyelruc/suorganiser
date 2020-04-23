@@ -1,10 +1,15 @@
+{% extends parent_template|default:"organizer/base_organizer.html" %}
+
+{% block title%}
+{{ block.super }} - Tags
+{% endblock %}
 
 {% block content %}
     <h2>Tag List</h2>
     <ul>
         {% for tag in tag_list %}
             <l1>
-                <a href="">
+                <a href="{{tag.get_absolute_url}}">
                 {{ tag.name|title }}</a>
             </l1>
         {% empty %} {#  if there's nothing in the list #}

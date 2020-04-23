@@ -1,3 +1,10 @@
+{% extends parent_template|default:"organizer/base_organizer.html" %}
+
+{% block title%}
+{{ block.super }} - {{ startup.name }}
+{% endblock %}
+
+{% block content %}
 <article>
     <h2>{{ startup.name }}</h2>
     <di>
@@ -9,7 +16,7 @@
         <dd>{{ startup.contact_email }}</dd>
         <dt>Tag{{ startup.tags.count|pluralize }}</dt>
         {% for tag in startup.tags.all %}
-            <dd><a href="">
+            <dd><a href="{{ tag.get_absolute_url }}">
             {{ tag.name|title }}
             </a></dd>
         {% endfor %}
@@ -35,10 +42,11 @@
     <u1>
         {% for post in startup.blog_posts.all %}
             <li>
-            <a href=""> {{ post.title|title }}</a>
+            <a href="{{post.get_absolute_url}}"> {{ post.title|title }}</a>
             </li>
         {% endfor %}
     </u1>
 </section>
 {% endif%}
 </article>
+{% endblock %}
