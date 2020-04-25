@@ -1,18 +1,19 @@
 {% extends parent_template|default:"blog/base_blog.html" %}
-
+{% load crispy_forms_filters %}
 {% block title%}
 {{ block.super }} - Create Blog Post
 {% endblock %}
 
 {% block content %}
+
     <div>
         <div>
             <form
                 action="{% url 'blog_post_create'%}"
                 method="post">
                 {% csrf_token %}
-                {{ form.as_p }}
-                <button type = 'submit'>
+                  {{ form|crispy }}
+                <button class="btn btn-primary btn-sm" type = 'submit'>
                     Create Blog Post</button>
             </form>
         </div>

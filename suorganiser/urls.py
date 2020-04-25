@@ -15,18 +15,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
-from blog.views import PostList, post_detail
-from organizer.views import tag_detail, tag_list, startup_list, startup_detail
 from .views import redirect_root
+from blog.views import PostList, PostCreate, post_detail
+from organizer.views import TagCreate, StartupCreate, startup_detail, startup_list, tag_detail, tag_list
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('tag/', tag_list, name ='organizer_tag_list'),
+    path('tag/create/', TagCreate.as_view(), name='organizer_tag_create'),
     path('tag/<slug>/', tag_detail, name='organizer_tag_detail'),
     path('startup/',startup_list, name='organizer_startup_list'),
+    path('startup/create/',StartupCreate.as_view(), name='organizer_startup_create'),
     path('startup/<slug>/', startup_detail, name='organizer_startup_detail'),
     path('',redirect_root),
     path('blog/', PostList.as_view(), name='blog_post_list'),
-    path('blog/<year>/<month>/<slug>', post_detail, name = 'blog_post_detail')
+    path('blog/create/',PostCreate.as_view(), name='blog_post_create'),
+    path('blog/<year>/<month>/<slug>', post_detail, name = 'blog_post_detail'),
+
 ]
