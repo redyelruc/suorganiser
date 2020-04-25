@@ -9,7 +9,8 @@ class SlugCleanMixin(forms.ModelForm):
     def clean_slug(self):
         new_slug = self.cleaned_data ['slug'].lower()
         if new_slug == 'create':
-            raise ValidationError('Slug cannot be "create".')
+            raise ValidationError(
+                'Slug cannot be "create".')
         return new_slug
 
 class TagForm(SlugCleanMixin):

@@ -3,7 +3,7 @@ from .models import Tag, Startup
 from django.shortcuts import get_object_or_404, render
 
 from .models import Tag, Startup
-from .forms import TagForm
+
 
 
 def tag_list(request):
@@ -29,6 +29,3 @@ def startup_list(request):
 def startup_detail(request, slug):
     startup = get_object_or_404(Startup, slug__iexact=slug)
     return render(request,'organizer/startup_detail.html', {'startup':startup})
-
-def tag_form(request):
-    return render(request,'organizer/tag_form.html')

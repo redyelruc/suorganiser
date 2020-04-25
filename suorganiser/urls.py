@@ -17,13 +17,12 @@ from django.contrib import admin
 from django.urls import path
 
 from blog.views import PostList, post_detail
-from organizer.views import tag_detail, tag_list, startup_list, startup_detail, tag_form
+from organizer.views import tag_detail, tag_list, startup_list, startup_detail,
 from .views import redirect_root
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('tag/', tag_list, name ='organizer_tag_list'),
-    path('tag/create/', tag_form, name='organizer_tag_create'),
     path('tag/<slug>/', tag_detail, name='organizer_tag_detail'),
     path('startup/',startup_list, name='organizer_startup_list'),
     path('startup/<slug>/', startup_detail, name='organizer_startup_detail'),
