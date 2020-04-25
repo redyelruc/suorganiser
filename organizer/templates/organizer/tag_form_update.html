@@ -1,7 +1,7 @@
 {% extends parent_template|default:"organizer/base_organizer.html" %}
 
 {% block title%}
-{{ block.super }} - CUpdate Tag
+{{ block.super }} - Update Tag
 {% endblock %}
 
 {% block content %}
@@ -13,7 +13,7 @@
                 {% csrf_token%}
                 {{form.as_p}}
                 <button type = "submit">
-                    Create Tag</button> #}
+                    Create Tag</button>
             </form>
         </div>
     </div>
