@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 
 from blog.views import PostList, post_detail
-from organizer.views import tag_detail, tag_list, startup_list, startup_detail,
+from organizer.views import tag_detail, tag_list, startup_list, startup_detail
 from .views import redirect_root
 
 urlpatterns = [
