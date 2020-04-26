@@ -23,6 +23,12 @@
                     Edit Post</button>
             </a>
         </div>
+        <div>
+            <a href="{{post.get_delete_url}}">
+            <button class="btn btn-primary btn-sm" onclick = "">
+                    Delete Post</button>
+            </a>
+        </div>
     {% if post.startups.all or post.tags.all %}
         <footer>
 

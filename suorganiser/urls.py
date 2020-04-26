@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from .views import redirect_root
-from blog.views import PostList, PostCreate, PostUpdate, post_detail
+from blog.views import PostList, PostCreate, PostUpdate, PostDelete, post_detail
 from organizer.views import TagCreate, TagUpdate, StartupCreate, StartupUpdate, NewsLinkCreate, NewsLinkUpdate, startup_detail, startup_list, tag_detail, tag_list
 
 urlpatterns = [
@@ -34,6 +34,7 @@ urlpatterns = [
     path('blog/create/',PostCreate.as_view(), name='blog_post_create'),
     path('blog/<year>/<month>/<slug>', post_detail, name='blog_post_detail'),
     path('blog/<year>/<month>/<slug>/update', PostUpdate.as_view(), name='blog_post_update'),
+    path('blog/<year>/<month>/<slug>/delete', PostDelete.as_view(), name='blog_post_delete'),
     path('newslink/create', NewsLinkCreate.as_view(), name='organizer_newslink_create'),
     path('newslink/update/<pk>', NewsLinkUpdate.as_view(), name='organizer_newslink_update'),
 

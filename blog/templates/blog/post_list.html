@@ -19,6 +19,12 @@
                         <a href="{{ post.get_absolute_url }}">
                             {{ post.title|title }}</a>
                     </h2>
+                            <div>
+{#            <a href="{{post.get_delete_url}}">#}
+{#            <button class="btn btn-primary btn-sm" onclick = "">#}
+{#                    Delete Post</button>#}
+            </a>
+        </div>
                     <p>
                         Written on:
                         <time datetime="{{ post.pub_date|date:"Y-m-d" }}">

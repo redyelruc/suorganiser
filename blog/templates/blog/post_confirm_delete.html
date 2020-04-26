@@ -1,0 +1,20 @@
+{% extends parent_template|default:"blog/base_blog.html" %}
+{% load crispy_forms_filters %}
+{% block title %}
+{{ block.super}} - Delete Blog Post
+{% endblock %}
+
+{% block content %}
+<div>
+    <div>
+        <form
+            action = "{{ post.get_delete_url}}"
+            method = "post">
+            {% csrf_token %}
+            {{ form|crispy }}
+                <button class="btn btn-primary btn-sm" type = 'submit'>
+                    Confirm Delete</button>
+        </form>
+    </div>
+</div
+{% endblock %}>
