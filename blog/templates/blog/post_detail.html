@@ -16,17 +16,21 @@
             </time>
         </p>
     </header>
-
     {{ post.text|linebreaks }}
-
-    {% if posr.startups.all or post.tags.all %}
+        <div>
+            <a href="{{post.get_update_url}}">
+            <button class="btn btn-primary btn-sm" onclick = "">
+                    Edit Post</button>
+            </a>
+        </div>
+    {% if post.startups.all or post.tags.all %}
         <footer>
 
             {% if post.startups.all %}
                 <section>
                     <h3>Startup{{ post.startups.count|pluralize }}</h3>
                     <ul>
-                        {% for startup in post.startup.all %}
+                        {% for startup in post.startups.all %}
                             <li><a href="{{startup.get_absolute_url}}">{{ startup.name }}
                             </a></li>
                         {% endfor %}

@@ -6,7 +6,8 @@
 
 {% block content %}
 <article>
-    <h2>{{ startup.name }}</h2>
+    <h2>{{ startup.name }}            <a href="{{startup.get_update_url}}"><button class="btn btn-primary btn-sm" type = "submit">
+                    Edit Startup</button></a></h2>
     <di>
         <dt> Date Founded</dt>
         <dd>{{ startup.founded_date|date:"F jS, Y" }}</dd>   {# full moth, date + st or th, year #}
@@ -33,14 +34,20 @@
         {% for newslink in startup.newslink_set.all %}
         <li>
             {{ newslink.link|urlize }}
+                <a href="{{newslink.get_update_url}}">
+            <button class="btn btn-primary btn-sm" onclick = "">
+                    Edit Link</button>
+        </a>
         </li>
         {% endfor %}
     </u1>
 {% endif %}
+
     <p>
-        <a href="{% url 'organizer_newslink_create' %}">
+
+                <a href="{% url 'organizer_newslink_create' %}">
             <button class="btn btn-primary btn-sm" onclick = "">
-                    Add Article</button>
+                    Add New Link</button>
         </a>
     </p>
 </section>
@@ -57,11 +64,6 @@
     </u1>
 </p>
 {% endif%}
-    <p>
-        <a href="{% url 'blog_post_create' %}">
-        <button class="btn btn-primary btn-sm" onclick = "">
-                    Create Blog Post</button>
-    </p>
 </section>
 
 </article>

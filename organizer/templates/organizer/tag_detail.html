@@ -5,10 +5,13 @@
 {% endblock %}
 
 {% block content %}
-<h2>{{ tag.name|title}}</h2>
+    <h2>  {{ tag.name|title}}
+    <a href="{{tag.get_update_url}}"><button class="btn btn-primary btn-sm" type = "submit">
+                    Edit Tag</button></a>
+                </h2>
 {% if tag.startup_set.all%}
 <section>
-    <h3>Startup{{ tag.startup_set.count|pluralize }}</h3>
+    <h4>Associated Startup{{ tag.startup_set.count|pluralize }}</h4>
     <p>
         Tag is associated with
         {{ tag.startup_set.count}}
@@ -25,14 +28,18 @@
 {% endif %}
 {% if tag.blog_posts.all %}
 <section>
-    <h3>Blog Post{{ tag.blog_posts.count|pluralize }}</h3>
-    <u1>
+    <h4>Associated Blog Post{{ tag.blog_posts.count|pluralize }}</h4>
+    <p>
+        Tag is associated with
+        {{ tag.blog_posts.count}}
+        blog post{{ tag.blog_posts.count|pluralize }}. {# showing an s if there's more than one item in the list with the pluralize filter #}
+    </p>
     {% for post in tag.blog_posts.all %}
-    <li><a href="{{post.get_absolute_url}}">
+    <ul><a href="{{post.get_absolute_url}}">
         {{ post.title|title }}
-    </a></li>
+    </a></ul>
         {% endfor %}
-        </u1>
+
 {% endif %}
 {% if not tag.startup_set.all and not tag.blog_posts.all %}
 <p>This tag is not related to any content.</p>
