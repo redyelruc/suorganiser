@@ -17,9 +17,10 @@ from django.contrib import admin
 from django.urls import path
 from .views import redirect_root
 from blog.views import PostList, PostCreate, post_detail
-from organizer.views import TagCreate, StartupCreate, startup_detail, startup_list, tag_detail, tag_list
+from organizer.views import TagCreate, StartupCreate, NewsLinkCreate, startup_detail, startup_list, tag_detail, tag_list
 
 urlpatterns = [
+    path('',redirect_root),
     path('admin/', admin.site.urls),
     path('tag/', tag_list, name ='organizer_tag_list'),
     path('tag/create/', TagCreate.as_view(), name='organizer_tag_create'),
@@ -27,9 +28,9 @@ urlpatterns = [
     path('startup/',startup_list, name='organizer_startup_list'),
     path('startup/create/',StartupCreate.as_view(), name='organizer_startup_create'),
     path('startup/<slug>/', startup_detail, name='organizer_startup_detail'),
-    path('',redirect_root),
     path('blog/', PostList.as_view(), name='blog_post_list'),
     path('blog/create/',PostCreate.as_view(), name='blog_post_create'),
     path('blog/<year>/<month>/<slug>', post_detail, name = 'blog_post_detail'),
+    path('newslink/create', NewsLinkCreate.as_view(), name='organizer_newslink_create'),
 
 ]
