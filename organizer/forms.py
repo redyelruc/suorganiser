@@ -1,6 +1,5 @@
 from django import forms
 from django.core.exceptions import ValidationError
-
 from .models import Tag, Startup, NewsLink
 
 
@@ -12,6 +11,7 @@ class SlugCleanMixin(forms.ModelForm):
             raise ValidationError(
                 'Slug cannot be "create".')
         return new_slug
+
 
 class TagForm(SlugCleanMixin):
     class Meta:
