@@ -2,7 +2,6 @@ from django.db import models
 from django.urls import reverse
 
 
-# a model for a tag to tag a blogpost
 class Tag(models.Model):
     name = models.CharField(max_length = 50, unique = True)
     slug = models.SlugField(max_length = 31, unique = True, help_text='A label for URL config.')
@@ -14,6 +13,10 @@ class Tag(models.Model):
 
     def get_absolute_url(self):
         return reverse('organizer_tag_detail', kwargs = {'slug': self.slug})
+
+    def get_update_url(self):
+        return reverse('organizer_tag_update', kwargs = {'slug': self.slug})
+
 
 class Startup(models.Model):
     name = models.CharField(max_length = 50, db_index = True)
@@ -33,6 +36,10 @@ class Startup(models.Model):
     def get_absolute_url(self):
         return reverse('organizer_startup_detail', kwargs = {'slug': self.slug})
 
+    def get_update_url(self):
+        return reverse('organizer_startup_update', kwargs = {'slug': self.slug})
+
+
 class NewsLink(models.Model):
     title = models.CharField(max_length = 100)
     link = models.URLField(max_length = 255)
@@ -46,3 +53,8 @@ class NewsLink(models.Model):
     def __Str__(self):
         return "{}:{}".format(self.startup, self.title)
 
+    def get_absolute_url(self):
+        return self.startup.get_absolute_url()
+
+    def get_update_url(self):
+        return reverse('organizer_newslink_update',kwargs={'pk':self.pk})

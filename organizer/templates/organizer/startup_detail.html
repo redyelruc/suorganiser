@@ -6,9 +6,10 @@
 
 {% block content %}
 <article>
-    <h2>{{ startup.name }}</h2>
+    <h2>{{ startup.name }}            <a href="{{startup.get_update_url}}"><button class="btn btn-primary btn-sm" type = "submit">
+                    Edit Startup</button></a></h2>
     <di>
-        <dt> Date Founded></dt>
+        <dt> Date Founded</dt>
         <dd>{{ startup.founded_date|date:"F jS, Y" }}</dd>   {# full moth, date + st or th, year #}
         <dt>Website</dt>
         <dd>{{ startup.website|urlize }}</dd>
@@ -24,29 +25,46 @@
     </di>
 
 <p>{{ startup.description|linebreaks}}</p>
-{% if startup.newslink_set.all %}
+
 <section>
     <h3>Recent News</h3>
+
+{% if startup.newslink_set.all %}
     <u1>
         {% for newslink in startup.newslink_set.all %}
         <li>
             {{ newslink.link|urlize }}
+                <a href="{{newslink.get_update_url}}">
+            <button class="btn btn-primary btn-sm" onclick = "">
+                    Edit Link</button>
+        </a>
         </li>
         {% endfor %}
     </u1>
-</section>
 {% endif %}
-{% if startup.blog_posts.all%}
+
+    <p>
+
+                <a href="{% url 'organizer_newslink_create' %}">
+            <button class="btn btn-primary btn-sm" onclick = "">
+                    Add New Link</button>
+        </a>
+    </p>
+</section>
 <section>
+{% if startup.blog_posts.all%}
+<p>
     <h3>Blog Post{{ startup.blog_post.all|pluralize }}</h3>
     <u1>
         {% for post in startup.blog_posts.all %}
             <li>
-            <a href="{{post.get_absolute_url}}"> {{ post.title|title }}</a>
+            <a href="{{post.get_absolute_url}}">{{ post.title|title }}</a>
             </li>
         {% endfor %}
     </u1>
-</section>
+</p>
 {% endif%}
+</section>
+
 </article>
 {% endblock %}

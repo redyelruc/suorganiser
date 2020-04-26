@@ -1,0 +1,22 @@
+{% extends parent_template|default:"organizer/base_organizer.html" %}
+{% load crispy_forms_filters %}
+
+{% block title %}
+    {{ block.super }} - Create Startup
+{% endblock %}
+
+{% block content %}
+    <div>
+        <div>
+            <form
+                    action="{% url 'organizer_startup_create' %}"
+                    method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button class="btn btn-primary btn-sm" type='submit'>
+                    Create Startup
+                </button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
