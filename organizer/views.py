@@ -1,8 +1,9 @@
 from django.shortcuts import get_object_or_404, render, redirect,reverse
 from django.views.generic import View   # needed to make class based views
+from django.urls import reverse_lazy
 from .models import Tag, Startup, NewsLink
 from .forms import TagForm, StartupForm, NewsLinkForm
-from .utils import ObjectCreateMixin, ObjectUpdateMixin
+from .utils import ObjectCreateMixin, ObjectUpdateMixin, ObjectDeleteMixin
 
 
 class TagCreate(ObjectCreateMixin, View):
@@ -14,6 +15,13 @@ class TagUpdate(ObjectUpdateMixin, View):
     model = Tag
     template_name =('organizer/tag_form_update.html')
 
+
+class TagDelete(ObjectDeleteMixin, View):
+    model = Tag
+    success_url = reverse_lazy('organizer_tag_list')
+    template_name = ('organizer/tag_confirm_delete.html')
+
+
 class StartupCreate(ObjectCreateMixin, View):
     form_class= StartupForm
     template_name = 'organizer/startup_form.html'
@@ -23,6 +31,11 @@ class StartupUpdate(ObjectUpdateMixin,View):
     model = Startup
     template_name = 'organizer/startup_form_update.html'
 
+
+class StartupDelete(ObjectDeleteMixin, View):
+    model = Startup
+    success_url = reverse_lazy('organizer_startup_list')
+    template_name = ('organizer/startup_confirm_delete.html')
 
 class NewsLinkCreate(ObjectCreateMixin, View):
     form_class = NewsLinkForm
@@ -49,6 +62,19 @@ class NewsLinkUpdate(View):
             context = {'form':bound_form, 'newslink' : newslink}
             return render(request, self.template_name,context)
 
+
+class NewsLinkDelete(View):
+
+    def get(self, request,pk):
+        newslink = get_object_or_404(NewsLink, pk=pk)
+        return render(request, 'organizer/' 'newslink_confirm_delete.html', {'newslink': newslink})
+
+
+    def post(self,request,pk):
+        newslink = get_object_or_404(NewsLink, pk=pk)
+        startup=newslink.startup
+        newslink.delete()
+        return redirect(startup)
 
 
 def tag_list(request):
